@@ -5,21 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://n1043mn1ght-web.github.io">
     
-    <!-- Вшитая иконка (Base64) - Изумрудная ↑ -->
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAbUlEQVR4nGP8//8/Ay0BEwM9AAsDExAbpYAnA8N/BjS8H60H9DMwMPzHxT50H9DDwMDwn0724YpPNAzoYWCY4pMeA9BTZNDT9BiAniaDnqZHz2CnyKBn6NEz2CkC6BkAM7UnB+63KmkAAAAASUVORK5CYII=">
+    <!-- Фикс иконки: Полноразмерный Base64 PNG -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAZ0lEQVR4nO2WwQkAMAgE9/9pL8FasAvpYp7mIn6YAnIuAdAAVUAXvADuO0pS36mArCO9YAtIAmSByIAsMAmQByIDssAkQB6IDMgCk4B3f6AnYV9A6ksF6AU68AL486W+VIB6oAv8m8sDe7Id67mOfX8AAAAASUVORK5CYII=">
 
     <title>SmartCalc Invest — Compound Interest & Inflation Calculator</title>
     <meta name="description" content="Calculate real investment growth with inflation adjustment. Professional wealth engine by SmartCalc Network.">
     
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FinancialCalculator",
-      "name": "SmartCalc Invest",
-      "url": "https://n1043mn1ght-web.github.io"
-    }
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
@@ -42,9 +33,9 @@
 
     <main class="max-w-5xl mx-auto px-4 py-12">
         <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6">
+            <div class="lg:col-span-2 space-y-6 text-left">
                 <div class="bg-white rounded-xl shadow-sm border p-8">
-                    <h2 class="text-2xl font-bold text-[#064E3B] mb-6">Wealth Projection</h2>
+                    <h2 class="text-2xl font-bold text-[#064E3B] mb-6 text-left border-b pb-4">Wealth Projection</h2>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div><label class="block text-xs font-bold mb-2">Initial Invest ($)</label><input type="number" id="principal" value="10000" oninput="calculate()" class="main-input"></div>
                         <div><label class="block text-xs font-bold mb-2">Monthly Addition ($)</label><input type="number" id="monthly" value="500" oninput="calculate()" class="main-input"></div>
@@ -56,9 +47,9 @@
                         <input type="checkbox" id="inflation-toggle" onchange="calculate()" class="w-5 h-5 accent-emerald-500">
                     </div>
                 </div>
-                <section class="bg-white rounded-xl border p-8 text-sm text-gray-600">
-                    <h3 class="font-bold text-[#064E3B] mb-2 text-left">About Compounding</h3>
-                    <p class="text-left">Compound interest grows your wealth exponentially. Using an inflation adjustment helps you understand the future purchasing power of your money.</p>
+                <section class="bg-white rounded-xl border p-8 text-sm text-gray-600 text-left">
+                    <h3 class="font-bold text-[#064E3B] mb-2 text-left border-b pb-2">About Compounding</h3>
+                    <p class="text-left leading-relaxed">Compound interest grows your wealth exponentially. Using an inflation adjustment helps you understand the future purchasing power of your money.</p>
                 </section>
             </div>
             <div class="lg:col-span-1">
@@ -70,7 +61,7 @@
             </div>
         </div>
     </main>
-    <footer class="mt-20 py-10 text-center text-xs text-gray-400 border-t bg-white">© 2025 SmartCalc Invest. Quality Financial Tool.</footer>
+    <footer class="mt-20 py-10 text-center text-xs text-gray-400 border-t bg-white">© 2025 SmartCalc Invest Network.</footer>
 
     <script>
         function calculate() {
