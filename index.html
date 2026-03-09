@@ -3,48 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://n1043mn1ght-web.github.io">
+    <link rel="canonical" href="https://n1043mn1ght-web.github.io/smartcalc-invest/">
     
-    <!-- Сверхнадежный блок иконок -->
-    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAZ0lEQVR4nO2WwQkAMAgE9/9pL8FasAvpYp7mIn6YAnIuAdAAVUAXvADuO0pS36mArCO9YAtIAmSByIAsMAmQByIDssAkQB6IDMgCk4B3f6AnYV9A6ksF6AU68AL486W+VIB6oAv8m8sDe7Id79mOfX8AAAAASUVORK5CYII=">
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAZ0lEQVR4nO2WwQkAMAgE9/9pL8FasAvpYp7mIn6YAnIuAdAAVUAXvADuO0pS36mArCO9YAtIAmSByIAsMAmQByIDssAkQB6IDMgCk4B3f6AnYV9A6ksF6AU68AL486W+VIB6oAv8m8sDe7Id79mOfX8AAAAASUVORK5CYII=">
+    <!-- ГАРАНТИРОВАННАЯ ИКОНКА (Base64 PNG) -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWklEQVRYR+2W0QqAIAxEz/9/unYp6MaYmBe99CHiMIdpXAFUABXAAUeApVvV9V0FKAn5YCUgC5AFKgOywCRAFogMyAKTAHkgMiALTAKe/YHehf0C6X8mQC9wAn887VsFqAe6QD8Mog6X9Y6OqAAAAABJRU5ErkJggg==">
 
     <title>SmartCalc Invest — Wealth Projection Engine</title>
     <meta name="description" content="Calculate investment growth with inflation adjustment. Professional utility by SmartCalc.">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; text-align: left; }
+        body { font-family: 'Inter', sans-serif; }
         .main-input { width: 100%; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; background: #F9FAFB; }
         .main-input:focus { border-color: #10B981; outline: none; background: white; }
     </style>
 </head>
 <body class="bg-[#F3F4F6] text-[#111827] text-left">
-    <header class="bg-[#064E3B] text-white py-6 shadow-lg text-left">
-        <div class="max-w-5xl mx-auto px-4 flex justify-between items-center text-left">
-            <div class="flex items-center space-x-3 cursor-pointer text-left" onclick="location.reload()">
-                <div class="w-10 h-10 bg-white rounded flex items-center justify-center">
+    <header class="bg-[#064E3B] text-white py-6 shadow-lg">
+        <div class="max-w-5xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="location.reload()">
+                <div class="w-10 h-10 bg-white rounded flex items-center justify-center shadow-inner">
                     <span class="text-[#064E3B] font-bold text-2xl">↑</span>
                 </div>
-                <h1 class="text-2xl font-bold tracking-tight">SmartCalc <span class="font-light text-emerald-200 text-lg italic text-left">Invest</span></h1>
+                <h1 class="text-2xl font-bold tracking-tight text-white">SmartCalc <span class="font-light text-emerald-200 text-lg italic">Invest</span></h1>
             </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-12 text-left">
+    <main class="max-w-5xl mx-auto px-4 py-12">
         <div class="grid lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-6 text-left">
-                <div class="bg-white rounded-xl shadow-sm border p-8 text-left">
-                    <h2 class="text-2xl font-bold text-[#064E3B] mb-6 text-left border-b pb-4">Wealth Projection</h2>
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border p-8">
+                    <h2 class="text-2xl font-bold text-[#064E3B] mb-6 border-b pb-4 text-left uppercase tracking-tighter">Wealth Projection</h2>
                     <div class="grid md:grid-cols-2 gap-6 text-left">
-                        <div><label class="block text-xs font-bold mb-2">Initial Invest ($)</label><input type="number" id="principal" value="10000" oninput="calculate()" class="main-input"></div>
-                        <div><label class="block text-xs font-bold mb-2">Monthly Addition ($)</label><input type="number" id="monthly" value="500" oninput="calculate()" class="main-input"></div>
-                        <div><label class="block text-xs font-bold mb-2 text-left">Return Rate (%)</label><input type="number" id="rate" value="8" step="0.1" oninput="calculate()" class="main-input"></div>
-                        <div><label class="block text-xs font-bold mb-2 text-left">Years</label><input type="number" id="years" value="10" oninput="calculate()" class="main-input"></div>
+                        <div class="form-group"><label class="block text-xs font-bold mb-2">Initial Invest ($)</label><input type="number" id="principal" value="10000" oninput="calculate()" class="main-input"></div>
+                        <div class="form-group"><label class="block text-xs font-bold mb-2">Monthly Addition ($)</label><input type="number" id="monthly" value="500" oninput="calculate()" class="main-input"></div>
+                        <div class="form-group"><label class="block text-xs font-bold mb-2">Return Rate (%)</label><input type="number" id="rate" value="8" step="0.1" oninput="calculate()" class="main-input"></div>
+                        <div class="form-group"><label class="block text-xs font-bold mb-2">Years</label><input type="number" id="years" value="10" oninput="calculate()" class="main-input"></div>
                     </div>
-                    <div class="mt-8 pt-6 border-t flex items-center justify-between text-left">
-                        <span class="text-sm font-bold">Inflation Adjustment (3%)</span>
+                    <div class="mt-8 pt-6 border-t flex items-center justify-between">
+                        <span class="text-sm font-bold text-gray-700 uppercase tracking-tighter">Inflation Adjustment (3%)</span>
                         <input type="checkbox" id="inflation-toggle" onchange="calculate()" class="w-5 h-5 accent-emerald-500">
                     </div>
                 </div>
@@ -53,12 +51,12 @@
                 <div class="bg-white rounded-2xl shadow-xl border-t-8 border-[#10B981] p-8 sticky top-28 text-center">
                     <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Future Balance</p>
                     <div id="main-result" class="text-4xl font-bold text-[#064E3B] mb-2">$0</div>
-                    <p id="inflation-note" class="text-xs text-emerald-600 font-medium hidden">Adjusted for Inflation</p>
+                    <p id="inflation-note" class="text-xs text-emerald-600 font-medium hidden italic">Adjusted for 3% Inflation</p>
                 </div>
             </div>
         </div>
     </main>
-    <footer class="mt-20 py-10 text-center text-xs text-gray-400 border-t bg-white text-center">© 2025 SmartCalc Invest.</footer>
+    <footer class="mt-20 py-10 text-center text-xs text-gray-400 border-t bg-white italic tracking-tighter">© 2025 SmartCalc Invest — Professional Financial Suite.</footer>
 
     <script>
         function calculate() {
@@ -73,7 +71,7 @@
 
             let futureValue = principal * Math.pow(1 + rate, months);
             if (rate > 0) futureValue += monthly * (Math.pow(1 + rate, months) - 1) / rate;
-            else futureValue += months * monthly;
+            else futureValue += monthly * months;
 
             document.getElementById('main-result').innerText = '$' + Math.round(futureValue).toLocaleString();
             document.getElementById('inflation-note').classList.toggle('hidden', !isInfl);
