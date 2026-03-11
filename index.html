@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://n1043mn1ght-web.github.io/invest/">
     <meta http-equiv="content-language" content="en">
 
-    <!-- JSON-LD STRUCTURED DATA: INVESTMENT APPLICATION (Trust Signal for Google) -->
+    <!-- JSON-LD STRUCTURED DATA: INVESTMENT APPLICATION -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -28,10 +28,31 @@
       }
     }
     </script>
+
+    <!-- FAQ SCHEMA: Захват внимания в поиске Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How is compound interest calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compound interest is calculated using the principal amount, interest rate, and frequency of compounding. Our SmartCalc™ engine simulates monthly contributions to show true wealth growth."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Why is time important in investing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Time allows interest to earn more interest, known as compounding. Even 5 additional years can significantly increase your final portfolio value."
+        }
+      }]
+    }
+    </script>
     
-    <!-- Иконка вкладки -->
     <link rel="icon" type="image/png" href="arrow.png">
-    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
@@ -42,6 +63,14 @@
             --bg-body: #f1f5f9;
             --glass-white: rgba(255, 255, 255, 0.95);
         }
+
+        /* АНИМАЦИЯ ПУЛЬСАЦИИ AUTHORITY RANK */
+        @keyframes pulse-rank {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+        .authority-badge { animation: pulse-rank 2s infinite; }
 
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { margin: 0; background: var(--bg-body); color: var(--navy-deep); font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -93,9 +122,9 @@
             padding: 12px; border-radius: 12px; margin: 15px 0; font-size: 0.85rem; text-align: left;
         }
 
-        .visual-chart { height: 8px; background: #334155; border-radius: 10px; margin: 20px 0 10px; display: flex; overflow: hidden; }
-        #ch-p { background: #fff; width: 50%; transition: 0.5s; }
-        #ch-i { background: var(--primary); width: 50%; transition: 0.5s; }
+        .visual-chart { height: 12px; background: #334155; border-radius: 10px; margin: 20px 0 10px; display: flex; overflow: hidden; }
+        #ch-p { background: #fff; width: 50%; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        #ch-i { background: var(--primary); width: 50%; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 
         .legend { display: flex; justify-content: center; gap: 15px; font-size: 0.65rem; font-weight: 800; opacity: 0.6; }
 
@@ -113,139 +142,140 @@
 
 <header>
     <div class="header-inner">
-        <!-- Заменили # на прямую ссылку на ваш главный Хаб -->
-        <a href="https://n1043mn1ght-web.github.io/smartcalc-main/" class="logo">Smart<span>Calc</span>™</a>
-        <div style="font-size: 0.7rem; font-weight: 800; color: #16a34a;">✓ AUTHORITY RANK #1</div>
+        <a href="https://n1043mn1ght-web.github.io" class="logo-wrap">
+            <img src="arrow.png" alt="Logo" class="logo-img">
+            <div class="logo">Smart<span>Calc</span>™</div>
+        </a>
+        <!-- Добавлен класс authority-badge для пульсации -->
+        <div class="authority-badge" style="font-size: 0.7rem; font-weight: 800; color: #2563eb; letter-spacing: 1px;">✓ AUTHORITY RANK #1</div>
     </div>
 </header>
 
 <main class="wrapper">
     <section class="engine-card">
         <h1>Investment Growth Engine</h1>
+        <p style="color: #64748b; margin-bottom: 25px; font-weight: 600;">Strategic compound interest & ROI forecasting.</p>
         
         <div class="input-box">
-            <div class="label-row"><label>Initial Deposit</label><span class="val-display" id="d-t">$0</span></div>
-            <input type="range" id="d-i" min="100" max="100000" step="500" value="5000">
+            <div class="label-row"><label>Initial Deposit</label><span class="val-display">$<span id="p-v">10,000</span></span></div>
+            <input type="range" id="p-i" min="1000" max="500000" step="1000" value="10000">
         </div>
 
         <div class="input-box">
-            <div class="label-row"><label>Monthly Contribution</label><span class="val-display" id="m-t">$0</span></div>
-            <input type="range" id="m-i" min="0" max="10000" step="100" value="500">
+            <div class="label-row"><label>Monthly Contribution</label><span class="val-display">$<span id="m-v">500</span></span></div>
+            <input type="range" id="m-i" min="0" max="10000" step="50" value="500">
         </div>
 
         <div class="input-box">
-            <div class="label-row"><label>Expected Return (%)</label><span class="val-display" id="r-t">0%</span></div>
-            <input type="range" id="r-i" min="1" max="25" step="0.5" value="8">
+            <div class="label-row"><label>Expected Return (Annual %)</label><span class="val-display"><span id="r-v">8</span>%</span></div>
+            <input type="range" id="r-i" min="1" max="30" step="0.5" value="8">
         </div>
 
         <div class="input-box">
-            <div class="label-row"><label>Investment Horizon</label><span class="val-display" id="y-t">0y</span></div>
-            <input type="range" id="y-i" min="1" max="40" step="1" value="15">
+            <div class="label-row"><label>Investment Period (Years)</label><span class="val-display"><span id="t-v">10</span>y</span></div>
+            <input type="range" id="t-i" min="1" max="50" step="1" value="10">
+        </div>
+
+        <!-- БЛОК WEALTH INSIGHT -->
+        <div class="insight-pill" id="strat-msg" style="background: rgba(37, 99, 235, 0.05); border: 1px solid var(--primary); padding: 15px; border-radius: 15px; font-size: 0.85rem; color: #1e293b;">
+            <strong>💡 Wealth Tip:</strong> Reinvesting dividends can increase your final portfolio by up to 30% over long periods.
         </div>
     </section>
 
-    <aside class="res-panel">
-        <span class="res-label">Projected Future Wealth</span>
-        <div class="total-num" id="res-v">$0</div>
+    <aside class="res-panel" style="background: var(--navy-deep); color: #ffffff;">
+        <span class="res-label" style="color: #cbd5e1;">Future Wealth Estimate</span>
+        <div class="total-num" id="res-total" style="color: #ffffff; font-size: 3.5rem;">$105,420</div>
         
-        <div class="insight-pill" id="insight-v">
-            Analyzing growth trajectory...
+        <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                <span style="color: #94a3b8;">Total Contributions</span>
+                <strong id="res-dep" style="color: #fff;">$70,000</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span style="color: #94a3b8;">Total Interest Earned</span>
+                <strong id="res-int" style="color: #22c55e;">$35,420</strong>
+            </div>
         </div>
 
-        <div class="visual-chart">
-            <div id="ch-p"></div>
-            <div id="ch-i"></div>
+        <div class="visual-chart" style="height: 12px; background: #334155; border-radius: 10px; margin: 25px 0 10px; display: flex; overflow: hidden;">
+            <div id="ch-p" style="background: #fff; width: 66%; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+            <div id="ch-i" style="background: var(--primary); width: 34%; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);"></div>
         </div>
-        <div class="legend">
+        <div class="legend" style="color: #94a3b8; font-size: 0.65rem; gap: 20px;">
             <span>● PRINCIPAL</span>
-            <span>● INTEREST EARNED</span>
+            <span>● INTEREST</span>
         </div>
 
-        <button style="width:100%; padding:18px; border:none; border-radius:12px; background:var(--primary); color:#fff; font-weight:800; margin-top:25px; cursor:pointer;" onclick="window.print()">GENERATE WEALTH REPORT</button>
+        <button style="width:100%; padding:18px; border:none; border-radius:15px; background:var(--primary); color:#fff; font-weight:800; margin-top:30px; cursor:pointer;" onclick="window.print()">EXPORT FINANCIAL FORECAST</button>
     </aside>
 </main>
 
 <section class="seo-article">
     <div class="article-body">
-        <h2>The Power of Compound Interest</h2>
-        <p>Einstein famously called compound interest the "eighth wonder of the world." Our <strong>SmartCalc™ Invest</strong> engine demonstrates why. By reinvesting your returns, you create a snowball effect where your money begins to generate its own momentum.</p>
-        <p>Consistent monthly contributions, even small ones, act as the fuel for this engine. Over a 20-year horizon, the "Interest Earned" component often surpasses the total principal invested, marking the transition to true financial independence.</p>
-    </div>
-    <div style="background:#fff; padding:30px; border-radius:20px; border:1px solid #e2e8f0; height:fit-content;">
-        <h3 style="margin-top:0">Pro Insight</h3>
-        <p style="font-size: 0.95rem; color: #64748b;" id="advice-text">The "Rule of 72" suggests that at an 8% return, your money doubles every 9 years.</p>
+        <h2>The Mathematics of Financial Freedom</h2>
+        <p>Compound interest is the eighth wonder of the world. Our <strong>SmartCalc™ Investment Engine</strong> uses high-precision formulas to simulate how your wealth grows when interest starts earning interest on itself.</p>
+        <p>By adjusting your monthly contributions and expected ROI, you can find the <strong>optimal path to retirement</strong> or capital accumulation. We follow the 2026 wealth management standards to ensure your projections are grounded in strategic reality.</p>
     </div>
 </section>
 
-    <section class="wrapper" style="margin-top: 50px; border-top: 1px solid #e2e8f0; padding-top: 40px;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-        <div>
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem;">Wealth Forecasting FAQ</h2>
-            <p>The secret to <strong>Passive Income</strong> is time and compounding. Our engine simulates long-term market growth with monthly contribution logic.</p>
-        </div>
-        <div style="font-size: 0.95rem; color: #475569;">
-            <p><strong>What is the Rule of 72?</strong> A quick way to estimate when your money will double: divide 72 by your annual return rate.</p>
-            <p><strong>Why are monthly contributions important?</strong> Regular deposits lower your risk through dollar-cost averaging and significantly fuel the <strong>Wealth Snowball</strong>.</p>
-            <p><strong>What return rate should I use?</strong> Historical S&P 500 returns are around 8-10% annually (adjusted for inflation), but always plan with a conservative 6-7% for safety.</p>
-        </div>
+<footer>
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+        &copy; 2026 SmartCalc™ Global Investment Tools. All Rights Reserved.
+        <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 20px; line-height: 1.6;">
+            Disclaimer: The SmartCalc™ Investment Engine is a simulation tool. Market returns are not guaranteed. Past performance does not indicate future results. Consult a financial advisor before investing.
+        </p>
     </div>
-</section>
-
-
-<footer>&copy; 2026 SmartCalc™ Invest. Professional Wealth Forecasting.
-<p style="font-size: 0.7rem; color: #94a3b8; max-width: 800px; margin: 20px auto;">
-    Disclaimer: The SmartCalc™ Investment Engine is a simulation tool. Market returns are not guaranteed. Past performance does not indicate future results. Consult a financial advisor before investing.
-</p>
 </footer>
 
 <script>
-    const dIn = document.getElementById('d-i'), mIn = document.getElementById('m-i'), rIn = document.getElementById('r-i'), yIn = document.getElementById('y-i');
-    const dTxt = document.getElementById('d-t'), mTxt = document.getElementById('m-t'), rTxt = document.getElementById('r-t'), yTxt = document.getElementById('y-t');
-    const resVal = document.getElementById('res-v'), insight = document.getElementById('insight-v');
-    const barP = document.getElementById('ch-p'), barI = document.getElementById('ch-i');
-
-    const f = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const pIn = document.getElementById('p-i');
+    const mIn = document.getElementById('m-i');
+    const rIn = document.getElementById('r-i');
+    const tIn = document.getElementById('t-i');
 
     function update() {
-        const principal = parseFloat(dIn.value);
-        const monthly = parseFloat(mIn.value);
-        const rate = (parseFloat(rIn.value) / 100) / 12;
-        const years = parseFloat(yIn.value);
-        const months = years * 12;
+        const P = parseFloat(pIn.value);
+        const PMT = parseFloat(mIn.value);
+        const r = (parseFloat(rIn.value) / 100) / 12;
+        const t = parseFloat(tIn.value);
+        const n = t * 12;
 
-        dTxt.innerText = f.format(principal);
-        mTxt.innerText = f.format(monthly);
-        rTxt.innerText = rIn.value + '%';
-        yTxt.innerText = years + 'y';
+        document.getElementById('p-v').innerText = P.toLocaleString();
+        document.getElementById('m-v').innerText = PMT.toLocaleString();
+        document.getElementById('r-v').innerText = rIn.value;
+        document.getElementById('t-v').innerText = tIn.value;
 
-        // Future Value Formula: FV = P(1+r)^n + PMT * [((1+r)^n - 1) / r]
-        const fvPrincipal = principal * Math.pow(1 + rate, months);
-        const fvContributions = rate === 0 ? monthly * months : monthly * (Math.pow(1 + rate, months) - 1) / rate;
-        const totalWealth = fvPrincipal + fvContributions;
-        const totalInvested = principal + (monthly * months);
-        const interestEarned = totalWealth - totalInvested;
+        // Formula for Compound Interest with Monthly Contributions
+        const futureValue = P * Math.pow(1 + r, n) + PMT * ((Math.pow(1 + r, n) - 1) / r);
+        const totalInvested = P + (PMT * n);
+        const totalInterest = futureValue - totalInvested;
 
-        resVal.innerText = f.format(totalWealth);
+        document.getElementById('res-total').innerText = '$' + Math.round(futureValue).toLocaleString();
+        document.getElementById('res-dep').innerText = '$' + Math.round(totalInvested).toLocaleString();
+        document.getElementById('res-int').innerText = '$' + Math.round(totalInterest).toLocaleString();
 
-        // UI Charts
-        const pPerc = (totalInvested / totalWealth) * 100;
-        barP.style.width = pPerc + '%';
-        barI.style.width = (100 - pPerc) + '%';
+        // Update Chart
+        const pPercent = (totalInvested / futureValue) * 100;
+        const iPercent = 100 - pPercent;
+        document.getElementById('ch-p').style.width = pPercent + '%';
+        document.getElementById('ch-i').style.width = iPercent + '%';
 
-        // Insight logic
-        if (interestEarned > totalInvested) {
-            insight.innerHTML = "<b>Wealth Milestone:</b> Your interest earned has surpassed your total contributions! This is the 'Snowball Effect' in action.";
+        // Dynamic Strategic Note
+        const stratMsg = document.getElementById('strat-msg');
+        if (t > 15) {
+            stratMsg.innerHTML = "<strong>🚀 Compound Power:</strong> At 15+ years, interest starts to outpace your contributions. Time is now your biggest earner.";
         } else {
-            insight.innerHTML = `In ${years} years, your total contributions will be ${f.format(totalInvested)}. Keep going to see compounding take over.`;
+            stratMsg.innerHTML = "<strong>💡 Wealth Tip:</strong> Increasing your monthly contribution by just $100 can add significantly to your final balance.";
         }
     }
 
-    [dIn, mIn, rIn, yIn].forEach(el => el.addEventListener('input', update));
+    [pIn, mIn, rIn, tIn].forEach(el => el.addEventListener('input', update));
     update();
 </script>
-
 </body>
+
 </html>
+
 
 
 
