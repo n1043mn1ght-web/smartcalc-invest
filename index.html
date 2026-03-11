@@ -3,104 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Invest Pro — SmartCalc™ Financial Forecasting</title>
-    <meta name="google-site-verification" content="google5dfafccdc6f81413" />
-    <link rel="icon" type="image/png" href="arrow.png?v=4.0">
-    <link rel="apple-touch-icon" href="arrow.png">
-    <meta name="description" content="Professional compound interest engine. Calculate future wealth and investment growth with SmartCalc™ precision.">
-    <link rel="canonical" href="https://n1043mn1ght-web.github.io" />
+    <title>Invest Pro | SmartCalc™ — Wealth Forecasting Engine</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary: #3b82f6; --dark: #0f172a; --bg: #f1f5f9; --text: #1e293b; --muted: #64748b; }
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
-        body { margin: 0; background: var(--bg); color: var(--text); overflow-x: hidden; font-size: 14px; }
-        header { background: var(--dark); color: white; padding: 0.6rem; text-align: center; border-bottom: 2px solid var(--primary); }
-        .logo { font-size: 1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        :root { 
+            --primary: #2563eb;
+            --navy-deep: #0f172a;
+            --panel-steel: #cbd5e1;
+            --bg-body: #f1f5f9;
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { margin: 0; background: var(--bg-body); color: var(--navy-deep); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* HEADER: Standardized with Icon */
+        header { 
+            background: #fff; padding: 0.8rem 0; border-bottom: 2px solid #e2e8f0;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .header-inner { 
+            max-width: 1100px; margin: 0 auto; padding: 0 20px; 
+            display: flex; justify-content: space-between; align-items: center; 
+        }
+        .logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-img { width: 24px; height: 24px; object-fit: contain; }
+        .logo { font-size: 1.2rem; font-weight: 800; color: var(--navy-deep); }
         .logo span { color: var(--primary); }
-        .wrapper { max-width: 950px; margin: 10px auto; padding: 0 10px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 12px; }
-        .card { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-        h2 { font-size: 0.8rem; margin: 0 0 12px 0; text-transform: uppercase; color: var(--muted); border-left: 3px solid var(--primary); padding-left: 8px; }
-        .control-group { margin-bottom: 12px; }
-        .label-box { display: flex; justify-content: space-between; margin-bottom: 2px; }
-        label { font-size: 0.6rem; font-weight: 800; color: var(--muted); text-transform: uppercase; }
-        .val { font-size: 1rem; font-weight: 800; }
-        input[type=range] { width: 100%; appearance: none; background: #e2e8f0; height: 4px; border-radius: 10px; outline: none; margin: 8px 0; }
-        input[type=range]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; background: white; border: 3px solid var(--primary); border-radius: 50%; cursor: pointer; }
-        .res-panel { text-align: center; display: flex; flex-direction: column; justify-content: center; }
-        .total-num { font-size: 2.8rem; font-weight: 900; color: var(--dark); margin: 0; letter-spacing: -2px; line-height: 1; }
-        .badge { display: inline-block; padding: 4px 10px; border-radius: 50px; font-weight: 800; background: #eff6ff; color: var(--primary); font-size: 0.75rem; margin-top: 5px; }
-        .comp-info { margin-top: 12px; font-size: 0.75rem; color: var(--muted); padding: 8px; background: #f8fafc; border-radius: 8px; }
-        .chart { height: 6px; background: #e2e8f0; border-radius: 10px; margin: 12px 0 6px; display: flex; overflow: hidden; }
-        #ch-p { background: var(--dark); transition: 0.5s; }
-        #ch-i { background: var(--primary); transition: 0.5s; }
-        .eco-nav { grid-column: span 2; display: flex; justify-content: center; gap: 15px; padding: 8px; border-top: 1px solid #e2e8f0; }
-        .eco-nav a { font-size: 0.6rem; font-weight: 800; color: var(--muted); text-decoration: none; text-transform: uppercase; }
-        .btn { width: 100%; margin-top: 12px; padding: 10px; border: none; border-radius: 8px; background: var(--dark); color: white; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
-        .seo-article { max-width: 950px; margin: 20px auto; padding: 25px; background: white; border-radius: 16px; border: 1px solid #e2e8f0; line-height: 1.7; color: #475569; }
-        @media (max-width: 700px) { .wrapper { grid-template-columns: 1fr; } .total-num { font-size: 2.4rem; } }
+
+        /* MAIN LAYOUT */
+        .wrapper { max-width: 1100px; margin: 25px auto; padding: 0 20px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; }
+        
+        .engine-card {
+            background: var(--panel-steel); border-radius: 30px; padding: 30px;
+            border: 1px solid #94a3b8; box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0 0 15px; line-height: 1.1; }
+
+        .input-box {
+            background: var(--glass-white); border-radius: 18px; padding: 18px; margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        label { font-size: 0.75rem; font-weight: 800; color: var(--navy-deep); text-transform: uppercase; letter-spacing: 0.5px; }
+        .val-display { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+
+        input[type=range] { width: 100%; appearance: none; background: #e2e8f0; height: 5px; border-radius: 10px; outline: none; }
+        input[type=range]::-webkit-slider-thumb { 
+            appearance: none; width: 20px; height: 20px; background: var(--primary); 
+            border: 4px solid #fff; border-radius: 50%; cursor: pointer;
+        }
+
+        /* RESULT PANEL */
+        .res-panel {
+            background: var(--navy-deep); color: #fff; border-radius: 25px; padding: 35px;
+            display: flex; flex-direction: column; justify-content: center; text-align: center;
+        }
+        .res-label { font-size: 0.75rem; color: #94a3b8; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .total-num { font-size: 3.8rem; font-weight: 800; margin: 10px 0; letter-spacing: -2px; line-height: 1; }
+        
+        .insight-pill {
+            background: rgba(37, 99, 235, 0.15); border: 1px solid var(--primary);
+            padding: 12px; border-radius: 12px; margin: 15px 0; font-size: 0.85rem; text-align: left;
+        }
+
+        .visual-chart { height: 8px; background: #334155; border-radius: 10px; margin: 20px 0 10px; display: flex; overflow: hidden; }
+        #ch-p { background: #fff; width: 50%; transition: 0.5s; }
+        #ch-i { background: var(--primary); width: 50%; transition: 0.5s; }
+
+        .legend { display: flex; justify-content: center; gap: 15px; font-size: 0.65rem; font-weight: 800; opacity: 0.6; }
+
+        /* ARTICLE */
+        .seo-article { max-width: 1100px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; }
+        .article-body p { font-size: 1.05rem; color: #475569; line-height: 1.7; }
+
+        .eco-nav { grid-column: span 2; display: flex; justify-content: center; gap: 20px; margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+        .eco-nav a { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-decoration: none; text-transform: uppercase; }
+
+        footer { text-align: center; padding: 40px; font-size: 0.75rem; color: #94a3b8; border-top: 1px solid #e2e8f0; margin-top: 40px; }
+
+        @media (max-width: 850px) { .wrapper, .seo-article { grid-template-columns: 1fr; } .total-num { font-size: 3rem; } }
     </style>
 </head>
 <body>
-<header><div class="logo">Smart<span>Calc</span> Invest</div></header>
+
+<header>
+    <div class="header-inner">
+        <a href="#" class="logo-wrap">
+            <img src="arrow.png" alt="SmartCalc Logo" class="logo-img">
+            <div class="logo">Smart<span>Calc</span> Invest</div>
+        </a>
+        <div style="font-size: 0.7rem; font-weight: 800; color: #16a34a;">✓ 2026 FORWARD DATA</div>
+    </div>
+</header>
+
 <main class="wrapper">
-    <section class="card">
-        <h2>Parameters</h2>
-        <div class="control-group">
-            <div class="label-box"><label>Deposit</label><span class="val" id="d-t">$5,000</span></div>
-            <input type="range" id="d-i" min="100" max="50000" step="100" value="5000">
+    <section class="engine-card">
+        <h1>Investment Growth Engine</h1>
+        
+        <div class="input-box">
+            <div class="label-row"><label>Initial Deposit</label><span class="val-display" id="d-t">$0</span></div>
+            <input type="range" id="d-i" min="100" max="100000" step="500" value="5000">
         </div>
-        <div class="control-group">
-            <div class="label-box"><label>Monthly Add</label><span class="val" id="m-t">$100</span></div>
-            <input type="range" id="m-i" min="0" max="5000" step="50" value="100">
+
+        <div class="input-box">
+            <div class="label-row"><label>Monthly Contribution</label><span class="val-display" id="m-t">$0</span></div>
+            <input type="range" id="m-i" min="0" max="10000" step="100" value="500">
         </div>
-        <div class="control-group">
-            <div class="label-box"><label>Rate (%)</label><span class="val" id="r-t">8%</span></div>
-            <input type="range" id="r-i" min="1" max="30" step="0.1" value="8">
+
+        <div class="input-box">
+            <div class="label-row"><label>Expected Return (%)</label><span class="val-display" id="r-t">0%</span></div>
+            <input type="range" id="r-i" min="1" max="25" step="0.5" value="8">
         </div>
-        <div class="control-group">
-            <div class="label-box"><label>Period</label><span class="val" id="y-t">10y</span></div>
-            <input type="range" id="y-i" min="1" max="40" step="1" value="10">
+
+        <div class="input-box">
+            <div class="label-row"><label>Investment Horizon</label><span class="val-display" id="y-t">0y</span></div>
+            <input type="range" id="y-i" min="1" max="40" step="1" value="15">
         </div>
     </section>
-    <section class="card res-panel">
-        <label>Future Wealth</label>
+
+    <aside class="res-panel">
+        <span class="res-label">Projected Future Wealth</span>
         <div class="total-num" id="res-v">$0</div>
-        <div class="badge" id="prof-v">+$0 Profit</div>
-        <div class="comp-info" id="comp-msg">Smart Investing Analysis...</div>
-        <div class="chart"><div id="ch-p"></div><div id="ch-i"></div></div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.5rem; font-weight: 800; opacity: 0.6;">
-            <span>● PRINCIPAL</span><span>● INTEREST</span>
+        
+        <div class="insight-pill" id="insight-v">
+            Analyzing growth trajectory...
         </div>
-        <button class="btn" onclick="window.print()">DOWNLOAD REPORT</button>
-    </section>
-    <nav class="eco-nav">
-        <a href="https://n1043mn1ght-web.github.io">● Health Pro</a>
-        <a href="https://n1043mn1ght-web.github.io">● Mortgage Pro</a>
-    </nav>
+
+        <div class="visual-chart">
+            <div id="ch-p"></div>
+            <div id="ch-i"></div>
+        </div>
+        <div class="legend">
+            <span>● PRINCIPAL</span>
+            <span>● INTEREST EARNED</span>
+        </div>
+
+        <button style="width:100%; padding:18px; border:none; border-radius:12px; background:var(--primary); color:#fff; font-weight:800; margin-top:25px; cursor:pointer;" onclick="window.print()">GENERATE WEALTH REPORT</button>
+    </aside>
 </main>
-<article class="seo-article">
-    <h2>Exponential Growth via Compound Interest</h2>
-    <p>Compound interest is the addition of interest to the principal sum of a deposit—it is <strong>interest on interest</strong>. This SmartCalc™ tool demonstrates how consistency and time lead to significant wealth accumulation.</p>
-    <p>By leveraging the "Rule of 72" and regular monthly contributions, investors can forecast retirement capital with surgical precision. All calculations are handled locally for absolute privacy.</p>
-</article>
-<footer><p style="text-align:center; padding: 15px; font-size: 0.7rem; color: var(--muted);">&copy; 2024 SmartCalc™ Ecosystem.</p></footer>
+
+
+
+<section class="seo-article">
+    <div class="article-body">
+        <h2>The Power of Compound Interest</h2>
+        <p>Einstein famously called compound interest the "eighth wonder of the world." Our <strong>SmartCalc™ Invest</strong> engine demonstrates why. By reinvesting your returns, you create a snowball effect where your money begins to generate its own momentum.</p>
+        <p>Consistent monthly contributions, even small ones, act as the fuel for this engine. Over a 20-year horizon, the "Interest Earned" component often surpasses the total principal invested, marking the transition to true financial independence.</p>
+    </div>
+    <div style="background:#fff; padding:30px; border-radius:20px; border:1px solid #e2e8f0; height:fit-content;">
+        <h3 style="margin-top:0">Pro Insight</h3>
+        <p style="font-size: 0.95rem; color: #64748b;">The "Rule of 72" suggests that at an 8% return, your money doubles every 9 years. Use our horizon slider to see the doubling effect in action.</p>
+    </div>
+
+    <nav class="eco-nav">
+        <a href="#">● Mortgage Strategy</a>
+        <a href="#">● Health Index Pro</a>
+        <a href="#">● Auto Finance Tool</a>
+    </nav>
+</section>
+
+<footer>&copy; 2026 SmartCalc™ Global — Engineering Future Wealth.</footer>
+
 <script>
     const d_i = document.getElementById('d-i'), m_i = document.getElementById('m-i'), r_i = document.getElementById('r-i'), y_i = document.getElementById('y-i');
+    const f = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
     function update() {
         const P = parseFloat(d_i.value), PMT = parseFloat(m_i.value), r = (parseFloat(r_i.value)/100)/12, n = parseFloat(y_i.value)*12;
+        
         let fv = P * Math.pow(1 + r, n) + (r > 0 ? PMT * (Math.pow(1 + r, n) - 1) / r : PMT * n);
         const invested = P + (PMT * n);
         const profit = fv - invested;
-        document.getElementById('d-t').innerText = '$' + P.toLocaleString();
-        document.getElementById('m-t').innerText = '$' + PMT.toLocaleString();
+
+        document.getElementById('d-t').innerText = f.format(P);
+        document.getElementById('m-t').innerText = f.format(PMT);
         document.getElementById('r-t').innerText = parseFloat(r_i.value).toFixed(1) + '%';
         document.getElementById('y-t').innerText = y_i.value + 'y';
-        document.getElementById('res-v').innerText = '$' + Math.round(fv).toLocaleString();
-        document.getElementById('prof-v').innerText = '+$' + Math.round(profit).toLocaleString() + ' PROFIT';
-        document.getElementById('comp-msg').innerHTML = `Cash: <b>$${invested.toLocaleString()}</b> | Profit: <b>$${Math.round(profit).toLocaleString()}</b>`;
+        
+        document.getElementById('res-v').innerText = f.format(Math.round(fv));
+        
+        // Dynamic Insight
+        let msg = `Total invested: <b>${f.format(invested)}</b>. Profit: <b>${f.format(profit)}</b>.`;
+        if (profit > invested) {
+            msg = `🔥 <b>Wealth Milestone:</b> Your profit (${f.format(profit)}) has exceeded your total contributions!`;
+        }
+        document.getElementById('insight-v').innerHTML = msg;
+
+        // Visual Chart
         const pPerc = (invested / fv) * 100;
         document.getElementById('ch-p').style.width = pPerc + '%';
         document.getElementById('ch-i').style.width = (100 - pPerc) + '%';
     }
+
     [d_i, m_i, r_i, y_i].forEach(el => el.addEventListener('input', update));
     update();
 </script>
