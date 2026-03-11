@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Invest Pro | SmartCalc™ — Wealth Forecasting Engine</title>
     
+    <!-- Иконка вкладки -->
+    <link rel="icon" type="image/png" href="arrow.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
@@ -19,7 +22,6 @@
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { margin: 0; background: var(--bg-body); color: var(--navy-deep); font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        /* HEADER: Standardized with Icon */
         header { 
             background: #fff; padding: 0.8rem 0; border-bottom: 2px solid #e2e8f0;
             position: sticky; top: 0; z-index: 1000;
@@ -33,7 +35,6 @@
         .logo { font-size: 1.2rem; font-weight: 800; color: var(--navy-deep); }
         .logo span { color: var(--primary); }
 
-        /* MAIN LAYOUT */
         .wrapper { max-width: 1100px; margin: 25px auto; padding: 0 20px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; }
         
         .engine-card {
@@ -56,7 +57,6 @@
             border: 4px solid #fff; border-radius: 50%; cursor: pointer;
         }
 
-        /* RESULT PANEL */
         .res-panel {
             background: var(--navy-deep); color: #fff; border-radius: 25px; padding: 35px;
             display: flex; flex-direction: column; justify-content: center; text-align: center;
@@ -75,13 +75,9 @@
 
         .legend { display: flex; justify-content: center; gap: 15px; font-size: 0.65rem; font-weight: 800; opacity: 0.6; }
 
-        /* ARTICLE */
         .seo-article { max-width: 1100px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
         .article-body h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; }
         .article-body p { font-size: 1.05rem; color: #475569; line-height: 1.7; }
-
-        .eco-nav { grid-column: span 2; display: flex; justify-content: center; gap: 20px; margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
-        .eco-nav a { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-decoration: none; text-transform: uppercase; }
 
         footer { text-align: center; padding: 40px; font-size: 0.75rem; color: #94a3b8; border-top: 1px solid #e2e8f0; margin-top: 40px; }
 
@@ -146,8 +142,6 @@
     </aside>
 </main>
 
-
-
 <section class="seo-article">
     <div class="article-body">
         <h2>The Power of Compound Interest</h2>
@@ -156,51 +150,57 @@
     </div>
     <div style="background:#fff; padding:30px; border-radius:20px; border:1px solid #e2e8f0; height:fit-content;">
         <h3 style="margin-top:0">Pro Insight</h3>
-        <p style="font-size: 0.95rem; color: #64748b;">The "Rule of 72" suggests that at an 8% return, your money doubles every 9 years. Use our horizon slider to see the doubling effect in action.</p>
+        <p style="font-size: 0.95rem; color: #64748b;" id="advice-text">The "Rule of 72" suggests that at an 8% return, your money doubles every 9 years.</p>
     </div>
-
-    <nav class="eco-nav">
-        <a href="#">● Mortgage Strategy</a>
-        <a href="#">● Health Index Pro</a>
-        <a href="#">● Auto Finance Tool</a>
-    </nav>
 </section>
 
-<footer>&copy; 2026 SmartCalc™ Global — Engineering Future Wealth.</footer>
+<footer>&copy; 2026 SmartCalc™ Invest. Professional Wealth Forecasting.</footer>
 
 <script>
-    const d_i = document.getElementById('d-i'), m_i = document.getElementById('m-i'), r_i = document.getElementById('r-i'), y_i = document.getElementById('y-i');
+    const dIn = document.getElementById('d-i'), mIn = document.getElementById('m-i'), rIn = document.getElementById('r-i'), yIn = document.getElementById('y-i');
+    const dTxt = document.getElementById('d-t'), mTxt = document.getElementById('m-t'), rTxt = document.getElementById('r-t'), yTxt = document.getElementById('y-t');
+    const resVal = document.getElementById('res-v'), insight = document.getElementById('insight-v');
+    const barP = document.getElementById('ch-p'), barI = document.getElementById('ch-i');
+
     const f = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
     function update() {
-        const P = parseFloat(d_i.value), PMT = parseFloat(m_i.value), r = (parseFloat(r_i.value)/100)/12, n = parseFloat(y_i.value)*12;
-        
-        let fv = P * Math.pow(1 + r, n) + (r > 0 ? PMT * (Math.pow(1 + r, n) - 1) / r : PMT * n);
-        const invested = P + (PMT * n);
-        const profit = fv - invested;
+        const principal = parseFloat(dIn.value);
+        const monthly = parseFloat(mIn.value);
+        const rate = (parseFloat(rIn.value) / 100) / 12;
+        const years = parseFloat(yIn.value);
+        const months = years * 12;
 
-        document.getElementById('d-t').innerText = f.format(P);
-        document.getElementById('m-t').innerText = f.format(PMT);
-        document.getElementById('r-t').innerText = parseFloat(r_i.value).toFixed(1) + '%';
-        document.getElementById('y-t').innerText = y_i.value + 'y';
-        
-        document.getElementById('res-v').innerText = f.format(Math.round(fv));
-        
-        // Dynamic Insight
-        let msg = `Total invested: <b>${f.format(invested)}</b>. Profit: <b>${f.format(profit)}</b>.`;
-        if (profit > invested) {
-            msg = `🔥 <b>Wealth Milestone:</b> Your profit (${f.format(profit)}) has exceeded your total contributions!`;
+        dTxt.innerText = f.format(principal);
+        mTxt.innerText = f.format(monthly);
+        rTxt.innerText = rIn.value + '%';
+        yTxt.innerText = years + 'y';
+
+        // Future Value Formula: FV = P(1+r)^n + PMT * [((1+r)^n - 1) / r]
+        const fvPrincipal = principal * Math.pow(1 + rate, months);
+        const fvContributions = rate === 0 ? monthly * months : monthly * (Math.pow(1 + rate, months) - 1) / rate;
+        const totalWealth = fvPrincipal + fvContributions;
+        const totalInvested = principal + (monthly * months);
+        const interestEarned = totalWealth - totalInvested;
+
+        resVal.innerText = f.format(totalWealth);
+
+        // UI Charts
+        const pPerc = (totalInvested / totalWealth) * 100;
+        barP.style.width = pPerc + '%';
+        barI.style.width = (100 - pPerc) + '%';
+
+        // Insight logic
+        if (interestEarned > totalInvested) {
+            insight.innerHTML = "<b>Wealth Milestone:</b> Your interest earned has surpassed your total contributions! This is the 'Snowball Effect' in action.";
+        } else {
+            insight.innerHTML = `In ${years} years, your total contributions will be ${f.format(totalInvested)}. Keep going to see compounding take over.`;
         }
-        document.getElementById('insight-v').innerHTML = msg;
-
-        // Visual Chart
-        const pPerc = (invested / fv) * 100;
-        document.getElementById('ch-p').style.width = pPerc + '%';
-        document.getElementById('ch-i').style.width = (100 - pPerc) + '%';
     }
 
-    [d_i, m_i, r_i, y_i].forEach(el => el.addEventListener('input', update));
+    [dIn, mIn, rIn, yIn].forEach(el => el.addEventListener('input', update));
     update();
 </script>
+
 </body>
 </html>
